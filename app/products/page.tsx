@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import {
+  Suspense,
   useEffect,
   useRef,
   useState,
@@ -28,7 +29,7 @@ import {
   saveDeletedProductId,
 } from "@/services/localProductService";
 
-export default function ProductsPage() {
+function ProductsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -940,7 +941,13 @@ setTotal(
       </main>
 
     </div>
-  );
+   );
+}
 
-  
+export default function ProductsPageWrapper() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <ProductsPage />
+    </Suspense>
+  );
 }
