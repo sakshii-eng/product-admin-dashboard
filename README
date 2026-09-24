@@ -1,0 +1,166 @@
+# Product Admin Dashboard
+
+A responsive Product Admin Dashboard built using Next.js, React, TypeScript, Tailwind CSS, Axios, and the DummyJSON API.
+
+## Features
+
+* User login using DummyJSON authentication
+* Protected product dashboard
+* Logout functionality
+* Product listing with:
+
+  * Product image
+  * Title
+  * Category
+  * Price
+  * Rating
+  * Stock
+* Responsive desktop table and mobile card layout
+* Pagination with page numbers
+* Previous and Next buttons
+* Page sizes of 10, 20, and 50
+* Search with debounce
+* Request cancellation to prevent stale search results
+* Category filtering
+* Server-side sorting
+* Product details page
+* Add product
+* Edit product
+* Delete product with confirmation
+* Form validation
+* Loading, empty, and error states
+* Retry functionality
+* URL-based search, filter, sorting, page, and page-size state
+* Invalid URL pagination values are handled safely
+* Shared Axios instance with authentication and centralized error handling
+* LocalStorage overlay for product mutations
+
+## Technologies
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* Axios
+* DummyJSON API
+
+## API
+
+This project uses the DummyJSON API:
+
+https://dummyjson.com
+
+Authentication:
+
+`POST /auth/login`
+
+Products:
+
+`GET /products`
+
+Search:
+
+`GET /products/search?q=`
+
+Categories:
+
+`GET /products/categories`
+
+Category products:
+
+`GET /products/category/{category}`
+
+Product details:
+
+`GET /products/{id}`
+
+Add:
+
+`POST /products/add`
+
+Update:
+
+`PUT /products/{id}`
+
+Delete:
+
+`DELETE /products/{id}`
+
+## Setup
+
+Clone the repository:
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+```
+
+Go into the project:
+
+```bash
+cd product-admin-dashboard
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Open:
+
+```text
+http://localhost:3000
+```
+
+## Login
+
+Use the DummyJSON test credentials:
+
+```text
+Username: emilys
+Password: emilyspass
+```
+
+## Implementation Choices
+
+### Search and Category
+
+DummyJSON does not provide a combined search-and-category endpoint for this implementation.
+
+Therefore, when both values are present in the URL, search takes priority.
+
+### Search Race Conditions
+
+Search requests use `AbortController` to cancel previous requests.
+
+A request ID is also used so that an older response cannot overwrite the latest search result.
+
+### URL State
+
+The following values are stored in the URL:
+
+* Search
+* Category
+* Sort
+* Page
+* Page size
+
+This allows the current dashboard state to be refreshed or shared through the URL.
+
+### Product Mutations
+
+DummyJSON mutation endpoints simulate add, update, and delete operations but do not provide permanent server-side persistence.
+
+Therefore, this project stores mutation results in LocalStorage and overlays them on the API data.
+
+## AI Assistance
+
+AI tools were used during development for guidance, debugging, code structure suggestions, and implementation support.
+
+All generated code was reviewed, tested, and modified as required. The implementation and its behavior were manually tested, and the developer understands the code used in the project.
